@@ -235,6 +235,19 @@ p {
 .section--hero {
   padding-top: 10rem;
   padding-bottom: var(--space-4xl);
+  overflow: hidden;
+}
+
+/* Subtle Dot Grid Background */
+.hero__dot-grid {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(0, 0, 0, 0.15) 1px, transparent 1px);
+  background-size: 16px 16px;
+  mask-image: radial-gradient(ellipse 90% 80% at 50% 45%, black 25%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse 90% 80% at 50% 45%, black 25%, transparent 75%);
+  pointer-events: none;
+  z-index: 0;
 }
 
 /* Light Section (Default) */
@@ -1747,5 +1760,105 @@ p {
     50% {
       background-position: 100% 50%;
     }
+  }
+}
+
+/* ===================================
+   FLOATING FEATURE CHIPS
+   =================================== */
+
+/* Hero Content Wrapper (for chip positioning) */
+.hero__content {
+  position: relative;
+  z-index: 1;
+}
+
+/* Floating Feature Chips */
+.floating-chip {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: var(--space-xs) var(--space-md);
+  background: var(--bg-white);
+  border: 1px solid var(--border-light-strong);
+  border-radius: var(--radius-full);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--text-dark);
+  box-shadow: var(--shadow-md);
+  white-space: nowrap;
+  z-index: 0;
+  opacity: 0.75;
+  cursor: default;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+.floating-chip svg {
+  color: var(--color-toast);
+  flex-shrink: 0;
+}
+
+.floating-chip:hover {
+  opacity: 1;
+  transform: scale(1.08) translateY(-2px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--color-toast);
+}
+
+/* Scattered Chip Positions - More random/organic placement */
+.floating-chip--1 {
+  /* Folders */
+  top: -8%;
+  left: 12%;
+}
+
+.floating-chip--2 {
+  /* Tags */
+  top: 5%;
+  right: 3%;
+}
+
+.floating-chip--3 {
+  /* Import */
+  top: 35%;
+  left: -12%;
+}
+
+.floating-chip--4 {
+  /* ChatGPT */
+  top: 18%;
+  right: -10%;
+}
+
+.floating-chip--5 {
+  /* Claude */
+  top: 65%;
+  left: -8%;
+}
+
+.floating-chip--6 {
+  /* YouTube */
+  top: 48%;
+  right: -6%;
+}
+
+.floating-chip--7 {
+  /* Prompts */
+  bottom: -5%;
+  left: 8%;
+}
+
+.floating-chip--8 {
+  /* PDF Tools */
+  bottom: 12%;
+  right: 2%;
+}
+
+/* Responsive - Hide chips on smaller screens */
+@media (max-width: 1024px) {
+  .floating-chip {
+    display: none;
   }
 }

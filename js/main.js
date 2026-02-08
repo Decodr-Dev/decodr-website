@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initNavScrollEffect();
   initTiltEffect();
   initMorphingWords();
+  initChipParallax();
 });
 
 /**
@@ -319,4 +320,84 @@ function initMorphingWords() {
       console.warn('Morphing words: Invalid JSON data', e);
     }
   });
+}
+
+/**
+ * Floating Chip Parallax Effect
+ * Chips move subtly as mouse moves within hero section
+ */
+function initChipParallax() {
+  const hero = document.querySelector('.hero');
+  const chips = document.querySelectorAll('.floating-chip[data-speed]');
+
+  if (!hero || !chips.length) return;
+
+  // Check for reduced motion preference
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReducedMotion) return;
+
+  // Only apply on desktop
+  if (window.innerWidth < 1024) return;
+
+  let animationId;
+  let mouseX = 0;
+  let mouseY = 0;
+
+  // Track mouse position
+  hero.addEventListener('mousemove', (e) => {
+    const rect = hero.getBoundingClientRect();
+    // Normalize to -1 to 1 range from center
+    mouseX = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
+    mouseY = ((e.clientY - rect.top) / rect.height - 0.5) * 2;
+  }, { passive: true });
+
+  // Reset on mouse leave
+  hero.addEventListener('mouseleave', () => {
+    mouseX = 0;
+    mouseY = 0;
+  });
+
+  // Smooth animation loop
+  function animate() {
+    chips.forEach(chip => {
+      const speed = parseFloat(chip.dataset.speed) || 0.02;
+      const maxMove = 30; // Maximum pixels to move
+
+      const x = mouseX * maxMove * speed * 100;
+      const y = mouseY * maxMove * speed * 100;
+
+      chip.style.transform = `translate(${x}px, ${y}px)`;
+    });
+
+    animationId = requestAnimationFrame(animate);
+  }
+
+  animate();
+}
+
+/**
+ * Dot Grid Spotlight Effect
+ * Creates an amber glow that follows the cursor over the dot grid
+ */
+function initDotSpotlight() {
+  const hero = document.querySelector('.hero');
+  const spotlight = document.querySelector('.hero__dot-spotlight');
+
+  if (!hero || !spotlight) return;
+
+  // Check for reduced motion preference
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReducedMotion) return;
+
+  // Only apply on desktop
+  if (window.innerWidth < 1024) return;
+
+  hero.addEventListener('mousemove', (e) => {
+    const rect = hero.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    spotlight.style.left = `${x}px`;
+    spotlight.style.top = `${y}px`;
+  }, { passive: true });
 }
