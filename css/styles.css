@@ -1611,3 +1611,141 @@ p {
     padding: var(--space-2xl);
   }
 }
+
+/* --- 3D Tilt Card Effect --- */
+.tilt-card {
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}
+
+.tilt-card__inner {
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.15s ease-out;
+  will-change: transform;
+}
+
+.tilt-card__glare {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: var(--radius-xl);
+  background: linear-gradient(135deg,
+      rgba(255, 255, 255, 0.25) 0%,
+      rgba(255, 255, 255, 0) 50%,
+      rgba(255, 255, 255, 0) 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease-out;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.tilt-card:hover .tilt-card__glare {
+  opacity: 1;
+}
+
+.tilt-card .placeholder--hero {
+  transition: box-shadow 0.3s ease-out;
+}
+
+.tilt-card:hover .placeholder--hero {
+  box-shadow:
+    0 25px 50px -12px rgba(26, 26, 26, 0.15),
+    0 0 0 1px rgba(26, 26, 26, 0.05);
+}
+
+/* Disable tilt on touch devices */
+@media (hover: none) {
+  .tilt-card__inner {
+    transform: none !important;
+  }
+
+  .tilt-card__glare {
+    display: none;
+  }
+}
+
+/* --- Morphing Word Animation --- */
+.morphing-word {
+  display: inline-block;
+  position: relative;
+  transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+}
+
+.morphing-word.fade-out {
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+.morphing-word.fade-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* --- Animated Gradient Border --- */
+.gradient-border {
+  position: relative;
+  padding: 2px;
+  border-radius: var(--radius-xl);
+  background: linear-gradient(var(--gradient-angle, 0deg),
+      var(--color-accent) 0%,
+      var(--color-accent-light) 25%,
+      #F8D49A 50%,
+      var(--color-accent-light) 75%,
+      var(--color-accent) 100%);
+  animation: gradient-rotate 4s linear infinite;
+}
+
+.gradient-border .tilt-card__inner {
+  background: var(--bg-white);
+  border-radius: calc(var(--radius-xl) - 2px);
+  overflow: hidden;
+}
+
+.gradient-border .placeholder--hero {
+  border: none;
+  box-shadow: none;
+  background: var(--bg-white);
+}
+
+@property --gradient-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes gradient-rotate {
+  0% {
+    --gradient-angle: 0deg;
+  }
+
+  100% {
+    --gradient-angle: 360deg;
+  }
+}
+
+/* Fallback for browsers that don't support @property */
+@supports not (background: paint(something)) {
+  .gradient-border {
+    background: linear-gradient(135deg,
+        var(--color-accent) 0%,
+        var(--color-accent-light) 50%,
+        var(--color-accent) 100%);
+    background-size: 200% 200%;
+    animation: gradient-shift 3s ease-in-out infinite;
+  }
+
+  @keyframes gradient-shift {
+
+    0%,
+    100% {
+      background-position: 0% 50%;
+    }
+
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+}

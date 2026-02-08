@@ -10,6 +10,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initNavHighlight();
   initScrollAnimations();
   initNavScrollEffect();
+  initTiltEffect();
+  initMorphingWords();
 });
 
 /**
@@ -172,4 +174,149 @@ function initNavScrollEffect() {
       ticking = true;
     }
   }, { passive: true });
+}
+
+/**
+ * 3D Tilt Effect for hero image
+ * Creates a subtle perspective shift on mouse movement
+ */
+function initTiltEffect() {
+  const tiltCards = document.querySelectorAll('[data-tilt]');
+
+  if (!tiltCards.length) return;
+
+  // Check for reduced motion preference
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReducedMotion) return;
+
+  tiltCards.forEach(card => {
+    const inner = card.querySelector('.tilt-card__inner');
+    const glare = card.querySelector('.tilt-card__glare');
+
+    if (!inner) return;
+
+    const maxTilt = 8; // Max tilt in degrees
+    const maxGlareOpacity = 0.3;
+
+    let bounds;
+    let animationId;
+
+    const updateBounds = () => {
+      bounds = card.getBoundingClientRect();
+    };
+
+    const handleMouseMove = (e) => {
+      if (!bounds) updateBounds();
+
+      // Calculate mouse position relative to card center (0-1 range, centered)
+      const mouseX = (e.clientX - bounds.left) / bounds.width;
+      const mouseY = (e.clientY - bounds.top) / bounds.height;
+
+      // Convert to -1 to 1 range, centered at 0
+      const tiltX = (mouseY - 0.5) * 2;
+      const tiltY = (mouseX - 0.5) * -2;
+
+      // Apply transform with rotation
+      cancelAnimationFrame(animationId);
+      animationId = requestAnimationFrame(() => {
+        inner.style.transform = `
+          rotateX(${tiltX * maxTilt}deg) 
+          rotateY(${tiltY * maxTilt}deg)
+          translateZ(10px)
+        `;
+
+        // Update glare position
+        if (glare) {
+          const glareX = mouseX * 100;
+          const glareY = mouseY * 100;
+          glare.style.background = `
+            radial-gradient(
+              circle at ${glareX}% ${glareY}%,
+              rgba(255, 255, 255, ${maxGlareOpacity}) 0%,
+              rgba(255, 255, 255, 0) 60%
+            )
+          `;
+        }
+      });
+    };
+
+    const handleMouseEnter = () => {
+      updateBounds();
+      inner.style.transition = 'transform 0.1s ease-out';
+    };
+
+    const handleMouseLeave = () => {
+      inner.style.transition = 'transform 0.4s ease-out';
+      inner.style.transform = 'rotateX(0) rotateY(0) translateZ(0)';
+
+      if (glare) {
+        glare.style.background = '';
+      }
+    };
+
+    // Event listeners
+    card.addEventListener('mouseenter', handleMouseEnter);
+    card.addEventListener('mousemove', handleMouseMove);
+    card.addEventListener('mouseleave', handleMouseLeave);
+
+    // Update bounds on resize
+    window.addEventListener('resize', updateBounds, { passive: true });
+  });
+}
+
+/**
+ * Morphing Words Effect
+ * Cycles through words with a smooth fade animation
+ */
+function initMorphingWords() {
+  const morphingElements = document.querySelectorAll('.morphing-word');
+
+  if (!morphingElements.length) return;
+
+  // Check for reduced motion preference
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReducedMotion) return;
+
+  morphingElements.forEach(element => {
+    const wordsData = element.getAttribute('data-words');
+
+    if (!wordsData) return;
+
+    try {
+      const words = JSON.parse(wordsData);
+
+      if (!words.length) return;
+
+      let currentIndex = 0;
+      const interval = 2500; // Time between word changes (ms)
+      const animationDuration = 300; // Fade duration (ms)
+
+      const cycleWord = () => {
+        // Fade out
+        element.classList.add('fade-out');
+        element.classList.remove('fade-in');
+
+        setTimeout(() => {
+          // Change word
+          currentIndex = (currentIndex + 1) % words.length;
+          element.textContent = words[currentIndex];
+
+          // Fade in
+          element.classList.remove('fade-out');
+          element.classList.add('fade-in');
+        }, animationDuration);
+      };
+
+      // Start the cycle after initial delay
+      setTimeout(() => {
+        setInterval(cycleWord, interval);
+      }, interval);
+
+      // Add initial state
+      element.classList.add('fade-in');
+
+    } catch (e) {
+      console.warn('Morphing words: Invalid JSON data', e);
+    }
+  });
 }
