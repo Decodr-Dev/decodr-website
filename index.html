@@ -183,78 +183,150 @@
         <span class="section__eyebrow">Features</span>
         <h2 class="section__title">What Decodr <em>actually</em> does</h2>
         <p class="section__subtitle">Everything runs right inside the NotebookLM page. No popups, no separate dashboard.
-          It just works where you already are.</p>
+        </p>
       </div>
 
-      <div class="grid grid--features stagger-children">
-        <!-- Feature 1: Folders -->
-        <div class="card card--feature">
-          <div class="card__icon">📁</div>
-          <h3 class="card__title">Folders that make sense</h3>
-          <p class="card__description">Group your notebooks by project, class, topic—whatever system works for you.
-            Inside each notebook, your sources and generated content can be organized into folders too. No more
-            scrolling through a flat list hoping you recognize the name.</p>
-          <div class="placeholder placeholder--feature">
-            <span>Screenshot of folder system</span>
+      <div class="bento-grid">
+        <!-- Col 1: Tall Folders (Spans 2 rows) -->
+        <div class="bento-card bento-card--tall bento-card--accent">
+          <div class="bento-card__icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" />
+            </svg>
+          </div>
+          <h3 class="bento-card__title">Folders that make sense</h3>
+          <p class="bento-card__desc">Group notebooks by project, class, or topic. Keep everything organized in one
+            place.</p>
+          <div class="bento-card__visual">
+            <div class="folder-chips">
+              <span class="folder-chip">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" />
+                </svg> Projects
+              </span>
+              <span class="folder-chip">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+                  <path d="M6 12v5c3 3 9 3 12 0v-5" />
+                </svg> School
+              </span>
+              <span class="folder-chip">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
+                  <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+                </svg> Work
+              </span>
+            </div>
           </div>
         </div>
 
-        <!-- Feature 2: Tags -->
-        <div class="card card--feature">
-          <div class="card__icon">🏷️</div>
-          <h3 class="card__title">Color-coded tags for quick filtering</h3>
-          <p class="card__description">Tag notebooks and sources with custom labels. Color-code them however you want.
-            Then filter to find exactly what you need in seconds instead of minutes.</p>
-          <div class="placeholder placeholder--feature">
-            <span>Screenshot of tags and filtering</span>
+        <!-- Col 2/3 Row 1: Tags & Prompts -->
+        <div class="bento-card">
+          <div class="bento-card__icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z" />
+              <line x1="7" y1="7" x2="7.01" y2="7" />
+            </svg>
+          </div>
+          <h3 class="bento-card__title">Color-coded tags</h3>
+          <p class="bento-card__desc">Filter and find what you need in seconds.</p>
+          <div class="bento-card__visual">
+            <div class="tag-chips">
+              <span class="tag-chip tag-chip--red">Research</span>
+              <span class="tag-chip tag-chip--blue">Draft</span>
+              <span class="tag-chip tag-chip--green">Done</span>
+            </div>
           </div>
         </div>
 
-        <!-- Feature 3: One-Click Imports -->
-        <div class="card card--feature">
-          <div class="card__icon">📥</div>
-          <h3 class="card__title">Import from everywhere, all at once</h3>
-          <p class="card__description">Pull in conversations from ChatGPT, Claude, and Gemini with one click. Import
-            YouTube videos, full playlists, or entire channels. Clip articles and selected text from any webpage. Stop
-            copying and pasting. Just click.</p>
-          <div class="placeholder placeholder--feature">
-            <span>Screenshot of import options</span>
+        <div class="bento-card">
+          <div class="bento-card__icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 19l7-7 3 3-7 7-3-3z" />
+              <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z" />
+              <circle cx="11" cy="11" r="2" />
+            </svg>
+          </div>
+          <h3 class="bento-card__title">Prompt library</h3>
+          <p class="bento-card__desc">Save & reuse best prompts.</p>
+        </div>
+
+        <!-- Col 2/3 Row 2: Import (Wide) -->
+        <div class="bento-card bento-card--wide bento-card--accent">
+          <div class="bento-card__row">
+            <div class="bento-card__icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                <polyline points="7 10 12 15 17 10" />
+                <line x1="12" y1="15" x2="12" y2="3" />
+              </svg>
+            </div>
+            <div>
+              <h3 class="bento-card__title">Import from everywhere</h3>
+              <p class="bento-card__desc">ChatGPT, Claude, YouTube, PDFs, web articles — all with one click.</p>
+            </div>
+          </div>
+          <div class="bento-card__visual">
+            <div class="source-icons">
+              <!-- ChatGPT -->
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+                <path
+                  d="M9.205 8.658v-2.26c0-.19.072-.333.238-.428l4.543-2.616c.619-.357 1.356-.523 2.117-.523 2.854 0 4.662 2.212 4.662 4.566 0 .167 0 .357-.024.547l-4.71-2.759a.797.797 0 00-.856 0l-5.97 3.473zm10.609 8.8V12.06c0-.333-.143-.57-.429-.737l-5.97-3.473 1.95-1.118a.433.433 0 01.476 0l4.543 2.617c1.309.76 2.189 2.378 2.189 3.948 0 1.808-1.07 3.473-2.76 4.163zM7.802 12.703l-1.95-1.142c-.167-.095-.239-.238-.239-.428V5.899c0-2.545 1.95-4.472 4.591-4.472 1 0 1.927.333 2.712.928L8.23 5.067c-.285.166-.428.404-.428.737v6.898zM12 15.128l-2.795-1.57v-3.33L12 8.658l2.795 1.57v3.33L12 15.128zm1.796 7.23c-1 0-1.927-.332-2.712-.927l4.686-2.712c.285-.166.428-.404.428-.737v-6.898l1.974 1.142c.167.095.238.238.238.428v5.233c0 2.545-1.974 4.472-4.614 4.472zm-5.637-5.303l-4.544-2.617c-1.308-.761-2.188-2.378-2.188-3.948A4.482 4.482 0 014.21 6.327v5.423c0 .333.143.571.428.738l5.947 3.449-1.95 1.118a.432.432 0 01-.476 0zm-.262 3.9c-2.688 0-4.662-2.021-4.662-4.519 0-.19.024-.38.047-.57l4.686 2.71c.286.167.571.167.856 0l5.97-3.448v2.26c0 .19-.07.333-.237.428l-4.543 2.616c-.619.357-1.356.523-2.117.523zm5.899 2.83a5.947 5.947 0 005.827-4.756C22.287 18.339 24 15.84 24 13.296c0-1.665-.713-3.282-1.998-4.448.119-.5.19-.999.19-1.498 0-3.401-2.759-5.947-5.946-5.947-.642 0-1.26.095-1.88.31A5.962 5.962 0 0010.205 0a5.947 5.947 0 00-5.827 4.757C1.713 5.447 0 7.945 0 10.49c0 1.666.713 3.283 1.998 4.448-.119.5-.19 1-.19 1.499 0 3.401 2.759 5.946 5.946 5.946.642 0 1.26-.095 1.88-.309a5.96 5.96 0 004.162 1.713z" />
+              </svg>
+              <!-- Claude -->
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" fill-rule="evenodd" stroke="none">
+                <path
+                  d="M4.709 15.955l4.72-2.647.08-.23-.08-.128H9.2l-.79-.048-2.698-.073-2.339-.097-2.266-.122-.571-.121L0 11.784l.055-.352.48-.321.686.06 1.52.103 2.278.158 1.652.097 2.449.255h.389l.055-.157-.134-.098-.103-.097-2.358-1.596-2.552-1.688-1.336-.972-.724-.491-.364-.462-.158-1.008.656-.722.881.06.225.061.893.686 1.908 1.476 2.491 1.833.365.304.145-.103.019-.073-.164-.274-1.355-2.446-1.446-2.49-.644-1.032-.17-.619a2.97 2.97 0 01-.104-.729L6.283.134 6.696 0l.996.134.42.364.62 1.414 1.002 2.229 1.555 3.03.456.898.243.832.091.255h.158V9.01l.128-1.706.237-2.095.23-2.695.08-.76.376-.91.747-.492.584.28.48.685-.067.444-.286 1.851-.559 2.903-.364 1.942h.212l.243-.242.985-1.306 1.652-2.064.73-.82.85-.904.547-.431h1.033l.76 1.129-.34 1.166-1.064 1.347-.881 1.142-1.264 1.7-.79 1.36.073.11.188-.02 2.856-.606 1.543-.28 1.841-.315.833.388.091.395-.328.807-1.969.486-2.309.462-3.439.813-.042.03.049.061 1.549.146.662.036h1.622l3.02.225.79.522.474.638-.079.485-1.215.62-1.64-.389-3.829-.91-1.312-.329h-.182v.11l1.093 1.068 2.006 1.81 2.509 2.33.127.578-.322.455-.34-.049-2.205-1.657-.851-.747-1.926-1.62h-.128v.17l.444.649 2.345 3.521.122 1.08-.17.353-.608.213-.668-.122-1.374-1.925-1.415-2.167-1.143-1.943-.14.08-.674 7.254-.316.37-.729.28-.607-.461-.322-.747.322-1.476.389-1.924.315-1.53.286-1.9.17-.632-.012-.042-.14.018-1.434 1.967-2.18 2.945-1.726 1.845-.414.164-.717-.37.067-.662.401-.589 2.388-3.036 1.44-1.882.93-1.086-.006-.158h-.055L4.132 18.56l-1.13.146-.487-.456.061-.746.231-.243 1.908-1.312-.006.006z" />
+              </svg>
+              <!-- Gemini -->
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+                <path
+                  d="M20.616 10.835a14.147 14.147 0 01-4.45-3.001 14.111 14.111 0 01-3.678-6.452.503.503 0 00-.975 0 14.134 14.134 0 01-3.679 6.452 14.155 14.155 0 01-4.45 3.001c-.65.28-1.318.505-2.002.678a.502.502 0 000 .975c.684.172 1.35.397 2.002.677a14.147 14.147 0 014.45 3.001 14.112 14.112 0 013.679 6.453.502.502 0 00.975 0c.172-.685.397-1.351.677-2.003a14.145 14.145 0 013.001-4.45 14.113 14.113 0 016.453-3.678.503.503 0 000-.975 13.245 13.245 0 01-2.003-.678z" />
+              </svg>
+              <!-- YouTube -->
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+                <path
+                  d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+              </svg>
+              <!-- Page Icon -->
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                <polyline points="14 2 14 8 20 8" />
+              </svg>
+            </div>
           </div>
         </div>
 
-        <!-- Feature 4: Smart Import -->
-        <div class="card card--feature">
-          <div class="card__icon">⚡</div>
-          <h3 class="card__title">The stuff NotebookLM can't handle</h3>
-          <p class="card__description">Import Anki flashcards and other file types NotebookLM doesn't natively support.
-            Got a PDF that's too big? Decodr compresses it automatically or splits it into smaller parts. No more
-            bouncing between random tools.</p>
-          <div class="placeholder placeholder--feature">
-            <span>Screenshot of PDF compression</span>
+        <!-- Row 3: PDF (Normal) + Progress (Wide) -->
+        <div class="bento-card">
+          <div class="bento-card__icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+            </svg>
           </div>
+          <h3 class="bento-card__title">PDF tools</h3>
+          <p class="bento-card__desc">Auto-compress or split large files.</p>
         </div>
 
-        <!-- Feature 5: Prompt Library -->
-        <div class="card card--feature">
-          <div class="card__icon">✍️</div>
-          <h3 class="card__title">Save your best prompts</h3>
-          <p class="card__description">If you keep typing the same prompts over and over ("summarize the key arguments,"
-            "create practice questions," "explain this like I'm five"), just save them. One click to insert. Works
-            across all your notebooks.</p>
-          <div class="placeholder placeholder--feature">
-            <span>Screenshot of prompt library</span>
+        <div class="bento-card bento-card--wide">
+          <div class="bento-card__row">
+            <div class="bento-card__icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="18" y1="20" x2="18" y2="10" />
+                <line x1="12" y1="20" x2="12" y2="4" />
+                <line x1="6" y1="20" x2="6" y2="14" />
+              </svg>
+            </div>
+            <div>
+              <h3 class="bento-card__title">Progress tracking</h3>
+              <p class="bento-card__desc">Visualize what you've covered. Keep your streak alive.</p>
+            </div>
           </div>
-        </div>
-
-        <!-- Feature 6: Progress Tracking -->
-        <div class="card card--feature">
-          <div class="card__icon">📊</div>
-          <h3 class="card__title">See where you stand</h3>
-          <p class="card__description">Track your progress across notebooks and folders. Know what you've covered, what
-            still needs attention, and where to pick up next. Helpful when you're managing multiple projects or studying
-            for more than one thing.</p>
-          <div class="placeholder placeholder--feature">
-            <span>Screenshot of progress tracker</span>
+          <!-- Simple Progress Bar Visual -->
+          <div class="bento-card__visual">
+            <div class="progress-bar">
+              <div class="progress-bar__fill"></div>
+            </div>
           </div>
         </div>
       </div>
