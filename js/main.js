@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initTiltEffect();
   initMorphingWords();
   initChipParallax();
+  initProgressAnimation();
 });
 
 /**
@@ -400,4 +401,66 @@ function initDotSpotlight() {
     spotlight.style.left = `${x}px`;
     spotlight.style.top = `${y}px`;
   }, { passive: true });
+}
+
+/**
+ * Progress Bar Animation
+ */
+function initProgressAnimation() {
+  // Target the container that holds both label and bar
+  const visualCard = document.querySelector('.progress-info')?.closest('.bento-card__visual');
+  if (!visualCard) return;
+
+  const progressBar = visualCard.querySelector('.progress-bar__fill');
+  const progressPercent = visualCard.querySelector('.progress-info__percent');
+
+  if (!progressBar || !progressPercent) return;
+
+  const targetWidth = 65; // Target percentage
+
+  // Set initial state
+  progressBar.style.width = '0%';
+  progressPercent.textContent = '0%';
+
+  // Create observer
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        // Animate width with linear progression (steady filling)
+        progressBar.style.transition = 'width 10s linear';
+        progressBar.style.width = `${targetWidth}%`;
+
+        // Animate counter linearly
+        animateValue(progressPercent, 0, targetWidth, 10000);
+
+        // Stop observing
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  observer.observe(visualCard);
+}
+
+/**
+ * Animate number value
+ */
+function animateValue(obj, start, end, duration) {
+  let startTimestamp = null;
+  const step = (timestamp) => {
+    if (!startTimestamp) startTimestamp = timestamp;
+    const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+
+    // Linear easing for steady numbers
+    const ease = progress;
+
+    obj.innerHTML = Math.floor(ease * (end - start) + start) + "%";
+
+    if (progress < 1) {
+      window.requestAnimationFrame(step);
+    } else {
+      obj.innerHTML = end + "%"; // Ensure exact final value
+    }
+  };
+  window.requestAnimationFrame(step);
 }

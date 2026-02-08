@@ -990,13 +990,30 @@ p {
 }
 
 /* Progress Bar Visual */
+.progress-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.progress-info__label {
+  color: var(--text-secondary-light);
+}
+
+.progress-info__percent {
+  color: var(--color-accent);
+  font-weight: 600;
+}
+
 .progress-bar {
   height: 6px;
   width: 100%;
   background: var(--bg-light);
   border-radius: var(--radius-full);
   overflow: hidden;
-  margin-top: 4px;
 }
 
 .progress-bar__fill {
@@ -2045,4 +2062,17 @@ p {
   .floating-chip {
     display: none;
   }
+}
+
+/* --- Scroll Animations --- */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  will-change: opacity, transform;
+}
+
+.animate-on-scroll.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
