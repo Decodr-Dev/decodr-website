@@ -429,11 +429,11 @@ function initProgressAnimation() {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         // Animate width with linear progression (steady filling)
-        progressBar.style.transition = 'width 10s linear';
+        progressBar.style.transition = 'width 4s linear';
         progressBar.style.width = `${targetWidth}%`;
 
         // Animate counter linearly
-        animateValue(progressPercent, 0, targetWidth, 10000);
+        animateValue(progressPercent, 0, targetWidth, 4000);
 
         // Stop observing
         observer.unobserve(entry.target);

@@ -888,12 +888,33 @@ p {
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
   overflow: hidden;
+  /* Enhancement 4: Stronger resting shadow */
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+
+
+
+/* Enhancement 1: Soft inner glow on hover */
+.bento-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 0%, rgba(232, 165, 77, 0.08) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.bento-card:hover::after {
+  opacity: 1;
 }
 
 .bento-card:hover {
   border-color: var(--color-toast);
   box-shadow: var(--shadow-lg);
-  transform: translateY(-4px);
+  /* Enhancement 5: Scale micro-animation */
+  transform: translateY(-4px) scale(1.02);
 }
 
 /* Accent cards with subtle gradient */
@@ -912,6 +933,16 @@ p {
   margin-bottom: var(--space-md);
   color: var(--color-toast);
   flex-shrink: 0;
+  /* Enhancement 2: Icon transition */
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), background 0.3s ease;
+  position: relative;
+  z-index: 1;
+}
+
+/* Enhancement 2: Icon lift on hover */
+.bento-card:hover .bento-card__icon {
+  transform: scale(1.1);
+  background: rgba(232, 165, 77, 0.15);
 }
 
 .bento-card__title {
