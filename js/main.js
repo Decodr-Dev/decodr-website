@@ -14,6 +14,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initMorphingWords();
   initChipParallax();
   initProgressAnimation();
+  initStepsAnimation();
+  initMagneticButton();
 });
 
 /**
@@ -463,4 +465,64 @@ function animateValue(obj, start, end, duration) {
     }
   };
   window.requestAnimationFrame(step);
+}
+
+/**
+ * Steps Animation — Progressive line and step reveal
+ */
+function initStepsAnimation() {
+  const stepsContainer = document.getElementById('steps-animation');
+  if (!stepsContainer) return;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        stepsContainer.classList.add('animate');
+        observer.unobserve(stepsContainer);
+      }
+    });
+  }, {
+    root: null,
+    rootMargin: '0px 0px -100px 0px',
+    threshold: 0.2
+  });
+
+  observer.observe(stepsContainer);
+}
+
+/**
+ * Magnetic Button — Button slowly drifts toward mouse cursor
+ */
+function initMagneticButton() {
+  const section = document.getElementById('final-cta-section');
+  const button = document.getElementById('magnetic-cta');
+
+  if (!section || !button) return;
+
+  const strength = 0.3; // How strongly it follows (0.1 = subtle, 0.5 = strong)
+  const maxDistance = 50; // Max pixels it can move
+
+  section.addEventListener('mousemove', (e) => {
+    const rect = button.getBoundingClientRect();
+    const buttonCenterX = rect.left + rect.width / 2;
+    const buttonCenterY = rect.top + rect.height / 2;
+
+    const deltaX = e.clientX - buttonCenterX;
+    const deltaY = e.clientY - buttonCenterY;
+
+    // Calculate distance from cursor to button center
+    const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+
+    // Only apply effect when cursor is within reasonable range
+    if (distance < 300) {
+      const moveX = Math.min(Math.max(deltaX * strength, -maxDistance), maxDistance);
+      const moveY = Math.min(Math.max(deltaY * strength, -maxDistance), maxDistance);
+
+      button.style.transform = `translate(${moveX}px, ${moveY}px)`;
+    }
+  });
+
+  section.addEventListener('mouseleave', () => {
+    button.style.transform = 'translate(0, 0)';
+  });
 }

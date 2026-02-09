@@ -1113,16 +1113,29 @@ p {
   position: relative;
 }
 
-/* Connecting line */
-.steps::before {
-  content: '';
+/* Animated connector line track */
+.steps__line {
   position: absolute;
   top: 24px;
   left: calc(16.67% + 24px);
   right: calc(16.67% + 24px);
   height: 2px;
-  background: linear-gradient(90deg, var(--color-accent), var(--color-accent-light), var(--color-accent));
+  background: var(--border-default);
   z-index: 0;
+  border-radius: 1px;
+}
+
+/* Animated progress fill */
+.steps__line-progress {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--color-accent), var(--color-accent-light), var(--color-accent));
+  border-radius: 1px;
+  transition: width 2s ease-out;
+}
+
+.steps.animate .steps__line-progress {
+  width: 100%;
 }
 
 .step {
@@ -1131,6 +1144,7 @@ p {
   z-index: 1;
 }
 
+/* Step numbers hidden initially, revealed progressively */
 .step__number {
   width: 52px;
   height: 52px;
@@ -1139,19 +1153,95 @@ p {
   align-items: center;
   justify-content: center;
   background: var(--bg-white);
-  border: 2px solid var(--color-accent);
-  color: var(--color-accent);
+  border: 2px solid var(--border-default);
+  color: var(--text-dark-secondary);
   font-family: var(--font-display);
   font-weight: 700;
   font-size: var(--text-xl);
   border-radius: var(--radius-full);
-  transition: all var(--duration-base) var(--ease-out);
+  transition: all 0.5s ease-out;
+}
+
+/* Step content faded initially */
+.step__title,
+.step__description {
+  transition: opacity 0.5s ease-out;
+}
+
+/* Steps 2 and 3 completely hidden initially */
+.step--2 .step__number,
+.step--3 .step__number {
+  opacity: 0;
+  transform: scale(0.8);
+}
+
+.step--2 .step__title,
+.step--2 .step__description,
+.step--3 .step__title,
+.step--3 .step__description {
+  opacity: 0;
+}
+
+/* Step 1 visible by default */
+.step--1 .step__number {
+  opacity: 1;
+  transform: scale(1);
+  border: 2px solid var(--color-accent);
+  color: var(--color-accent);
+}
+
+/* Step 1 always visible first */
+.steps.animate .step--1 .step__number {
+  opacity: 1;
+  transform: scale(1);
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+  transition-delay: 0s;
+}
+
+.steps.animate .step--1 .step__title,
+.steps.animate .step--1 .step__description {
+  opacity: 1;
+  transition-delay: 0.1s;
+}
+
+/* Step 2 reveals as line reaches it */
+.steps.animate .step--2 .step__number {
+  opacity: 1;
+  transform: scale(1);
+  border: 2px solid var(--color-accent);
+  color: var(--color-accent);
+  transition-delay: 0.8s;
+}
+
+.steps.animate .step--2 .step__title,
+.steps.animate .step--2 .step__description {
+  opacity: 1;
+  transition-delay: 0.9s;
+}
+
+/* Step 3 reveals as line reaches end */
+.steps.animate .step--3 .step__number {
+  opacity: 1;
+  transform: scale(1);
+  border: 2px solid var(--color-accent);
+  color: var(--color-accent);
+  transition-delay: 1.6s;
+}
+
+.steps.animate .step--3 .step__title,
+.steps.animate .step--3 .step__description {
+  opacity: 1;
+  transition-delay: 1.7s;
 }
 
 .step:hover .step__number {
-  background: var(--color-accent);
-  color: var(--text-dark);
+  background: var(--color-accent) !important;
+  color: #fff !important;
   transform: scale(1.1);
+  border-color: var(--color-accent-dark) !important;
+  box-shadow: 0 4px 12px rgba(232, 165, 77, 0.3);
+  transition-delay: 0s !important;
 }
 
 .step__title {
@@ -2075,4 +2165,140 @@ p {
 .animate-on-scroll.visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* --- Highlight Text --- */
+.highlight {
+  background: linear-gradient(120deg, var(--color-accent-subtle) 0%, rgba(232, 165, 77, 0.15) 100%);
+  padding: 0.1em 0.4em;
+  border-radius: var(--radius-sm);
+  color: var(--color-accent-dark);
+  font-weight: 500;
+  position: relative;
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out, background 0.3s ease;
+}
+
+/* Staggered reveal when parent becomes visible */
+.animate-on-scroll.visible .highlight--stagger-1 {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.3s;
+}
+
+.animate-on-scroll.visible .highlight--stagger-2 {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.6s;
+}
+
+.animate-on-scroll.visible .highlight--stagger-3 {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.9s;
+}
+
+/* Hover glow effect */
+.highlight:hover {
+  background: linear-gradient(120deg, rgba(232, 165, 77, 0.25) 0%, rgba(232, 165, 77, 0.35) 100%);
+}
+
+/* Tooltip styling */
+.highlight[data-tooltip]::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  background: var(--bg-dark);
+  color: var(--color-accent);
+  padding: 0.5em 0.75em;
+  border-radius: var(--radius-md);
+  font-size: 0.8rem;
+  font-weight: 600;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  z-index: 10;
+  box-shadow: var(--shadow-lg);
+}
+
+/* Tooltip arrow */
+.highlight[data-tooltip]::before {
+  content: '';
+  position: absolute;
+  bottom: calc(100% + 2px);
+  left: 50%;
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-top-color: var(--bg-dark);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+/* Show tooltip on hover */
+.highlight[data-tooltip]:hover::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.highlight[data-tooltip]:hover::before {
+  opacity: 1;
+}
+
+/* --- Section Dot Grid for Dark Sections --- */
+.section--has-dots {
+  position: relative;
+  overflow: hidden;
+}
+
+.section__dot-grid {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+  background-size: 16px 16px;
+  mask-image: radial-gradient(ellipse 90% 80% at 50% 45%, black 25%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse 90% 80% at 50% 45%, black 25%, transparent 75%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Light section dot grid variant */
+.section--has-dots-light {
+  position: relative;
+  overflow: hidden;
+}
+
+.section__dot-grid--dark {
+  background-image: radial-gradient(circle, rgba(0, 0, 0, 0.1) 1px, transparent 1px);
+}
+
+/* --- Magnetic Button --- */
+.btn--magnetic {
+  transition: transform 0.15s ease-out, background 0.3s ease, box-shadow 0.3s ease;
+  will-change: transform;
+}
+
+/* --- Privacy Brief Tilt Effect --- */
+.privacy-brief[data-tilt] {
+  perspective: 1000px;
+  transform-style: preserve-3d;
+  position: relative;
+}
+
+.privacy-brief .tilt-card__inner {
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.privacy-brief .tilt-card__glare {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  z-index: 1;
 }

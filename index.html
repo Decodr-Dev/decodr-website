@@ -166,9 +166,15 @@
         <span class="problem__label">Sound familiar?</span>
         <h2 class="problem__title">NotebookLM is powerful.<br>But the more you use it...</h2>
         <div class="problem__content">
-          <p>Your notebook list turns into a wall of "Untitled Notebook (4)." You can't group anything. You can't tag
-            anything. You want to import a YouTube playlist and the answer is "do it one video at a time." Your PDF is
-            10MB over the limit and now you need to go find some random compression site.</p>
+          <p>Your notebook list turns into a wall of <span class="highlight highlight--stagger-1"
+              data-tooltip="Decodr adds folders">"Untitled Notebook (4)."</span> You can't
+            group anything. You can't tag
+            anything. You want to import a YouTube playlist and the answer is <span
+              class="highlight highlight--stagger-2" data-tooltip="Bulk import with one click">"do it one video
+              at a time."</span> Your PDF is
+            <span class="highlight highlight--stagger-3" data-tooltip="Auto-compress built in">10MB over the
+              limit</span> and now you need to go find some random compression site.
+          </p>
           <p>It's not that NotebookLM is bad. It's that the organization and import tools just aren't there yet.</p>
           <p>That's where Decodr comes in.</p>
         </div>
@@ -345,21 +351,26 @@
         <h2 class="section__title">Up and running in <em>30 seconds</em></h2>
       </div>
 
-      <div class="steps">
-        <div class="step animate-on-scroll">
+      <div class="steps" id="steps-animation">
+        <!-- Animated connector line -->
+        <div class="steps__line">
+          <div class="steps__line-progress"></div>
+        </div>
+
+        <div class="step step--1">
           <div class="step__number">1</div>
           <h4 class="step__title">Install Decodr</h4>
           <p class="step__description">Install Decodr from the Chrome Web Store. It's free.</p>
         </div>
 
-        <div class="step animate-on-scroll">
+        <div class="step step--2">
           <div class="step__number">2</div>
           <h4 class="step__title">Open NotebookLM</h4>
           <p class="step__description">Open NotebookLM. Decodr's features are already there, embedded right into the
             page.</p>
         </div>
 
-        <div class="step animate-on-scroll">
+        <div class="step step--3">
           <div class="step__number">3</div>
           <h4 class="step__title">Start organizing</h4>
           <p class="step__description">Start organizing, importing, and saving prompts. That's it. No setup wizard or
@@ -377,7 +388,8 @@
   </section>
 
   <!-- Built For Section -->
-  <section class="section section--dark">
+  <section class="section section--dark section--has-dots">
+    <div class="section__dot-grid"></div>
     <div class="container">
       <div class="section__header">
         <span class="section__eyebrow">Who It's For</span>
@@ -415,25 +427,32 @@
   <!-- Privacy Section -->
   <section class="section section--light">
     <div class="container">
-      <div class="privacy-brief animate-on-scroll">
-        <h2 class="privacy-brief__title">Your stuff stays <em>your</em> stuff</h2>
-        <p class="privacy-brief__content">Decodr runs locally in your browser. We don't read your notebooks, we don't
-          store your content, and we don't send anything to external servers. Sign-in uses Google OAuth—that's the only
-          data we touch. We built this to help you organize, not to collect your data.</p>
-        <a href="privacy.html" class="btn btn--secondary">Read our full privacy policy</a>
+      <div class="privacy-brief animate-on-scroll" data-tilt>
+        <div class="tilt-card__inner">
+          <h2 class="privacy-brief__title">Your stuff stays <em>your</em> stuff</h2>
+          <p class="privacy-brief__content">Decodr runs locally in your browser. We don't read your notebooks, we don't
+            store your content, and we don't send anything to external servers. Sign-in uses Google OAuth—that's the
+            only
+            data we touch. We built this to help you organize, not to collect your data.</p>
+          <a href="privacy.html" class="btn btn--secondary">Read our full privacy policy</a>
+        </div>
+        <div class="tilt-card__glare"></div>
       </div>
     </div>
   </section>
 
   <!-- Final CTA Section -->
-  <section class="section section--white">
+  <section class="section section--light section--has-dots-light" id="final-cta-section">
+    <div class="section__dot-grid section__dot-grid--dark"></div>
     <div class="container">
-      <div class="final-cta animate-on-scroll">
-        <h2 class="final-cta__title">Ready to get your notebooks <em>under control</em>?</h2>
-        <p class="final-cta__subtitle">Free to start. Takes about 30 seconds to install. And your future self will thank
+      <div class="section__header">
+        <h2 class="section__title">Ready to get your notebooks <em>under control</em>?</h2>
+        <p class="section__subtitle">Free to start. Takes about 30 seconds to install. And your future self will thank
           you.</p>
+      </div>
+      <div class="text-center">
         <a href="https://chromewebstore.google.com/detail/decodr-notebooklm-power-t/llpbgcbafdoncakinkecfinjadhnngag?authuser=2&hl=en-GB"
-          class="btn btn--primary btn--lg" target="_blank" rel="noopener">
+          class="btn btn--primary btn--lg btn--magnetic" id="magnetic-cta" target="_blank" rel="noopener">
           Add to Chrome — it's free
         </a>
       </div>
