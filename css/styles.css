@@ -825,9 +825,216 @@ p {
 }
 
 .hero__image {
+  font-size: var(--text-base);
+  line-height: 1.7;
+}
+
+/* --- Pricing Cards --- */
+.pricing-card {
+  background: var(--bg-white);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-2xl);
+  padding: var(--space-2xl);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: all var(--duration-base) var(--ease-out);
+}
+
+.pricing-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-xl);
+}
+
+.pricing-card--featured {
+  border: 2px solid var(--color-accent);
+  box-shadow: var(--shadow-accent);
+}
+
+.pricing-card--featured:hover {
+  box-shadow: 0 24px 60px rgba(232, 165, 77, 0.25);
+}
+
+.pricing-card__badge {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.pricing-card__name {
+  font-family: var(--font-body);
+  font-size: var(--text-lg);
+  font-weight: 600;
+  margin-bottom: var(--space-sm);
+  color: var(--text-dark);
+}
+
+.pricing-card__price {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-xs);
+  margin-bottom: var(--space-xs);
+}
+
+.pricing-card__amount {
+  font-family: var(--font-display);
+  font-size: var(--text-4xl);
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+.pricing-card__period {
+  color: var(--text-dark-muted);
+  font-size: var(--text-sm);
+}
+
+.pricing-card__original {
+  font-size: var(--text-sm);
+  color: var(--text-dark-muted);
+  text-decoration: line-through;
+  margin-bottom: var(--space-xs);
+}
+
+.pricing-card__savings {
+  display: inline-block;
+  font-size: var(--text-xs);
+  color: var(--color-success);
+  font-weight: 600;
+  margin-bottom: var(--space-lg);
+}
+
+.pricing-card__description {
+  font-size: var(--text-sm);
+  color: var(--text-dark-secondary);
+  margin-bottom: var(--space-xl);
+  padding-bottom: var(--space-xl);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.pricing-card__features {
+  flex: 1;
+  margin-bottom: var(--space-xl);
+}
+
+.pricing-card__feature {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-sm);
+  font-size: var(--text-sm);
+  color: var(--text-dark-secondary);
+  margin-bottom: var(--space-sm);
+}
+
+.pricing-card__feature::before {
+  content: '✓';
+  color: var(--color-success);
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+/* --- Grid Layouts --- */
+.grid {
+  display: grid;
+  gap: var(--space-xl);
+}
+
+.grid--2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.grid--3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.grid--features {
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-lg);
+}
+
+.grid--pricing {
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-lg);
+  align-items: start;
+}
+
+/* --- Hero Section --- */
+.hero {
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  background: var(--bg-light);
+}
+
+/* Decorative gradient orb */
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -30%;
+  right: -10%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, var(--color-accent-subtle) 0%, transparent 70%);
+  pointer-events: none;
+  opacity: 0.8;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -20%;
+  left: -10%;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(232, 165, 77, 0.05) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero__badge {
+  margin-bottom: var(--space-xl);
+  animation: fadeInUp 0.6s var(--ease-out) 0.1s both;
+}
+
+.hero__title {
+  max-width: 850px;
+  margin: 0 auto var(--space-xl);
+  font-size: var(--text-5xl);
+  animation: fadeInUp 0.6s var(--ease-out) 0.2s both;
+}
+
+.hero__subtitle {
+  font-size: var(--text-xl);
+  max-width: 650px;
+  margin: 0 auto var(--space-2xl);
+  color: var(--text-dark-secondary);
+  animation: fadeInUp 0.6s var(--ease-out) 0.3s both;
+}
+
+.hero__cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+  animation: fadeInUp 0.6s var(--ease-out) 0.4s both;
+}
+
+.hero__image {
   margin-top: var(--space-4xl);
   position: relative;
   animation: fadeInUp 0.8s var(--ease-out) 0.5s both;
+}
+
+/* --- Hero Screenshot --- */
+.hero__screenshot {
+  display: block;
+  width: 100%;
+  max-width: 1050px;
+  margin: 0 auto;
+  border: 2px dashed var(--border-light-strong);
+  border-radius: var(--radius-2xl);
+  box-shadow: var(--shadow-lg);
+  object-fit: cover;
 }
 
 /* --- Screenshot Placeholder --- */
@@ -844,12 +1051,6 @@ p {
   padding: var(--space-xl);
   text-align: center;
   box-shadow: var(--shadow-lg);
-}
-
-.placeholder--hero {
-  min-height: 450px;
-  max-width: 950px;
-  margin: 0 auto;
 }
 
 .placeholder--feature {
@@ -1642,6 +1843,7 @@ p {
 }
 
 @media (max-width: 640px) {
+
   /* Mobile-friendly comparison layout: each feature becomes a compact card */
   .table-container {
     overflow: visible;
@@ -2174,7 +2376,7 @@ p {
   left: 0;
   right: 0;
   bottom: 0;
-  border-radius: var(--radius-xl);
+  border-radius: var(--radius-2xl);
   background: linear-gradient(135deg,
       rgba(255, 255, 255, 0.25) 0%,
       rgba(255, 255, 255, 0) 50%,
@@ -2189,11 +2391,11 @@ p {
   opacity: 1;
 }
 
-.tilt-card .placeholder--hero {
+.tilt-card .hero__screenshot {
   transition: box-shadow 0.3s ease-out;
 }
 
-.tilt-card:hover .placeholder--hero {
+.tilt-card:hover .hero__screenshot {
   box-shadow:
     0 25px 50px -12px rgba(26, 26, 26, 0.15),
     0 0 0 1px rgba(26, 26, 26, 0.05);
