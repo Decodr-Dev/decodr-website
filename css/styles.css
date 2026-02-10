@@ -824,11 +824,6 @@ p {
   animation: fadeInUp 0.6s var(--ease-out) 0.4s both;
 }
 
-.hero__image {
-  font-size: var(--text-base);
-  line-height: 1.7;
-}
-
 /* --- Pricing Cards --- */
 .pricing-card {
   background: var(--bg-white);
@@ -1020,7 +1015,7 @@ p {
 }
 
 .hero__image {
-  margin-top: var(--space-4xl);
+  margin-top: var(--space-2xl);
   position: relative;
   animation: fadeInUp 0.8s var(--ease-out) 0.5s both;
 }
@@ -2255,6 +2250,10 @@ p {
 
   .hero__cta .btn {
     width: 100%;
+  }
+
+  .hero__image {
+    margin-top: var(--space-lg);
   }
 
   .problem {
