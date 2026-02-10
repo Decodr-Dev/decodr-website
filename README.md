@@ -28,8 +28,24 @@ Decodr enhances Google's NotebookLM with essential organization tools like folde
     npx http-server .
     ```
 
-## Deployment
+## Deployment (Netlify)
 
-Deploy to Vercel with zero configuration:
+Your site is hosted on **Netlify**. It is connected to your GitHub repository.
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fyourusername%2Fdecodr-website)
+### How to Update the Website
+Whenever you make changes to the code, simply push them to GitHub. Netlify will detect the changes and automatically redeploy the site.
+
+Run these commands in your terminal:
+
+```bash
+# 1. Stage all changes
+git add .
+
+# 2. Commit the changes (replace the message with your own)
+git commit -m "Describe your changes here"
+
+# 3. Push to GitHub -> Triggers Netlify Deploy
+git push
+```
+
+Your site will update in about 15-30 seconds.
